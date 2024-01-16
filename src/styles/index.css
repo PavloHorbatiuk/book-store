@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+ @apply font-inter
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@layer base{
+  h1 {
+    @apply  text-white  font-semibold text-lg leading-5;
+  }
+  h2{
+    @apply text-white font-semibold text-sm leading-6
+  }
+  span{
+    @apply text-white font-normal text-sm 
+  }
+  p{
+    @apply font-normal text-base
+  }
+}
