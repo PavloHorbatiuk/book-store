@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
- @apply font-inter
+ @apply font-inter text-white
 }
 
 code {
@@ -17,6 +17,9 @@ code {
   }
   h2{
     @apply text-white font-semibold text-sm leading-6
+  }
+  h3{
+    @apply font-normal text-lg leading-[21.78px]
   }
   span{
     @apply text-white font-normal text-sm 
