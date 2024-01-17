@@ -1,21 +1,28 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, memo, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { ReactComponent as DropDownIcon } from "./../../../assets/icons/dropdown.svg";
 import { ReactComponent as UpDownIcon } from "./../../../assets/icons/upIcon.svg";
 
-const sort = [{ sort: "popularity" }, { sort: "Name" }, { sort: "newest" }];
+interface IProps {
+    data: { name: string }[];
+    onChange: (selected: { name: string }) => void;
+}
+const Select = memo(function Select({ data, onChange }: IProps) {
+    const [selected, setSelected] = useState(data[0]);
 
-const Select = () => {
-    const [selected, setSelected] = useState(sort[0]);
+    const handleSelectChange = (value: { name: string }) => {
+        setSelected(value);
+        onChange(value);
+    };
 
     return (
         <div className=' w-[132px] border  border-white border-opacity-30 rounded-[6px]'>
-            <Listbox value={selected} onChange={setSelected}>
+            <Listbox value={selected} onChange={handleSelectChange}>
                 {({ open }) => (
                     <div className='relative mt-1'>
                         <Listbox.Button className='relative w-full cursor-default rounded-lg bg-none py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>
                             <span className='block truncate'>
-                                {selected.sort}
+                                {selected.name}
                             </span>
                             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
                                 {open ? <UpDownIcon /> : <DropDownIcon />}
@@ -29,7 +36,7 @@ const Select = () => {
                             leaveTo='opacity-0'
                         >
                             <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-[8px] bg-darkGrey py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
-                                {sort.map((item, personIdx) => (
+                                {data.map((item, personIdx) => (
                                     <Listbox.Option
                                         key={personIdx}
                                         className={({ active }) =>
@@ -49,7 +56,7 @@ const Select = () => {
                                                         : "font-normal "
                                                 }`}
                                             >
-                                                {item.sort}
+                                                {item.name}
                                             </span>
                                         )}
                                     </Listbox.Option>
@@ -61,6 +68,6 @@ const Select = () => {
             </Listbox>
         </div>
     );
-};
+});
 
 export default Select;

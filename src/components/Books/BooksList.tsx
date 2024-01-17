@@ -29,6 +29,16 @@ const BooksList = () => {
         setBooks(initialBooks);
     }, []);
 
+    const sort = (key: keyof BookType) => {
+        if (key) {
+            const sortedBooks = [...books].sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
+            console.log(sortedBooks, "sorted books");
+            // setBooks(sortedBooks);
+        }
+    };
+    sort("name");
     return (
         <div className='p-6'>
             <BookOptions count={books.length} />

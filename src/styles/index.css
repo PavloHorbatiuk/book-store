@@ -18,6 +18,9 @@ code {
   h2{
     @apply text-white font-semibold text-sm leading-6
   }
+  h4{
+    @apply text-white font-normal text-base 
+  }
   h3{
     @apply font-normal text-lg leading-[21.78px]
   }

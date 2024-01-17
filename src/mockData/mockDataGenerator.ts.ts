@@ -1,7 +1,6 @@
 export interface ReaderReview {
     username: string;
     comment: string;
-    rating: number;
 }
 
 export interface BookType {
@@ -10,6 +9,7 @@ export interface BookType {
     author: string;
     rating: number;
     description: string;
+    cover: string;
     readerReviews: ReaderReview[];
 }
 
@@ -28,6 +28,10 @@ function generateRandomBook() {
         "Jane Austen",
         "J.D. Salinger",
     ];
+    const coverBook = [
+        "./../assets/cover-book/coverBook2.svg",
+        "./../assets/cover-book/coverBook1.svg",
+    ];
     const ratings = [4.5, 3.8, 4.9, 4.2, 4.0];
 
     const randomIndex = Math.floor(Math.random() * names.length);
@@ -39,6 +43,7 @@ function generateRandomBook() {
         rating: ratings[randomIndex],
         description: generateRandomDescription(),
         readerReviews: generateRandomReaderReviews(),
+        cover: coverBook[randomIndex],
     };
 }
 
@@ -52,7 +57,8 @@ function generateRandomDescription() {
     ];
 
     const randomIndex = Math.floor(Math.random() * descriptions.length);
-    return descriptions[randomIndex];
+    const multiplyString = descriptions[randomIndex];
+    return multiplyString.repeat(10);
 }
 
 function generateRandomReaderReviews() {
