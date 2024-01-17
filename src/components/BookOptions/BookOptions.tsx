@@ -1,10 +1,22 @@
 import React from "react";
+import Select from "../ui/Select";
+import { ReactComponent as SortBy } from "./../../assets/icons/sorticon.svg";
 
-const BookOptions = () => {
+interface IProps {
+    count: number;
+}
+
+const BookOptions = ({ count }: IProps) => {
     return (
-        <div>
-            <h2>Books</h2>
-            <div>Sort by</div>
+        <div className=' flex items-center justify-between scroll-smooth'>
+            <h3>{count} Books</h3>
+            <div className='flex items-center'>
+                <span className='flex w-[100px]'>
+                    <SortBy className='cursor-pointer pr-1' />
+                    <h3>Sort By</h3>
+                </span>
+                <Select />
+            </div>
         </div>
     );
 };

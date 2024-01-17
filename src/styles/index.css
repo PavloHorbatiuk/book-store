@@ -25,6 +25,6 @@ code {
     @apply text-white font-normal text-sm 
   }
   p{
-    @apply font-normal text-base
+    @apply font-normal text-sm 
   }
 }

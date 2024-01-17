@@ -4,7 +4,7 @@ import { Routing } from "./routes/routing";
 
 function App() {
     return (
-        <div className='bg-black h-screen  object-center py-6'>
+        <div className='bg-black h-auto  object-center py-6'>
             <RouterProvider router={Routing} />
         </div>
     );
