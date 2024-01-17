@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "../ui/Select";
+import Select from "../ui/CustomSelect/Select";
 import { ReactComponent as SortBy } from "./../../assets/icons/sorticon.svg";
 
 interface IProps {

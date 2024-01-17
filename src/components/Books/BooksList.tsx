@@ -6,6 +6,7 @@ import {
 import InfiniteScroll from "react-infinite-scroll-component";
 import BookOptions from "../BookOptions/BookOptions";
 import BookItem from "./BookItem";
+import Loader from "../ui/Loader/Loader";
 
 const BooksList = () => {
     const [books, setBooks] = useState<BookType[]>([]);
@@ -34,7 +35,7 @@ const BooksList = () => {
                 dataLength={books.length}
                 next={fetchMoreBooks}
                 hasMore={hasMore}
-                loader={<h4>Loading...</h4>}
+                loader={<Loader />}
             >
                 <div className='flex flex-wrap grow shrink self-auto basis-auto gap-4 justify-between items-stretch pt-2'>
                     {books.map((book, index) => (

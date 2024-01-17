@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { ReactComponent as DropDownIcon } from "./../../assets/icons/dropdown.svg";
-import { ReactComponent as UpDownIcon } from "./../../assets/icons/upIcon.svg";
+import { ReactComponent as DropDownIcon } from "./../../../assets/icons/dropdown.svg";
+import { ReactComponent as UpDownIcon } from "./../../../assets/icons/upIcon.svg";
 
 const sort = [{ sort: "popularity" }, { sort: "Name" }, { sort: "newest" }];
 
