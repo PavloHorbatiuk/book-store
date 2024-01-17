@@ -1,3 +1,3 @@
 .layout {
-    @apply max-w-[1112px]  container mx-auto h-auto rounded-large border border-gray;
+    @apply max-w-[1112px]  container mx-auto min-h-screen  rounded-large border border-gray;
 }

@@ -5,6 +5,7 @@ export interface ReaderReview {
 }
 
 export interface BookType {
+    id: number;
     name: string;
     author: string;
     rating: number;
@@ -32,6 +33,7 @@ function generateRandomBook() {
     const randomIndex = Math.floor(Math.random() * names.length);
 
     return {
+        id: randomIndex,
         name: names[randomIndex],
         author: authors[randomIndex],
         rating: ratings[randomIndex],
