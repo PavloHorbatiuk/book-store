@@ -1,0 +1,3 @@
+.book-list{
+    @apply flex flex-wrap grow shrink self-auto basis-auto gap-4 justify-between items-stretch pt-2
+}

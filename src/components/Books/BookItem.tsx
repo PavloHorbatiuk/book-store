@@ -8,11 +8,13 @@ interface IProps {
 const BookItem = (props: IProps) => {
     const { author, name, rating } = props.book;
     return (
-        <div className='flex flex-col '>
+        <div className='flex flex-col'>
             <BookImg className=' max-h-[240px] max-w-[190px] w-full h-full rounded-xl' />
-            <p>{author}</p>
-            <p>{name}</p>
-            <p>{rating}/5</p>
+            <div className='pt-1'>
+                <p>{author}</p>
+                <p>{name}</p>
+                <p>{rating}/5</p>
+            </div>
         </div>
     );
 };
