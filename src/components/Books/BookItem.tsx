@@ -4,18 +4,18 @@ import { ReactComponent as BookImg } from "./../../assets/icons/bookImg.svg";
 import { motion } from "framer-motion";
 
 interface IProps {
-    book: BookType;
+    data: BookType;
 }
 
-const BookItem = (props: IProps) => {
-    const { author, name, rating, id } = props.book;
+const BookItem = ({ data }: IProps) => {
+    const { author, name, rating, id } = data;
     return (
         <motion.div
             whileHover={{ scale: [null, 1.1, 1.1] }}
             transition={{ duration: 0.3 }}
             className='flex flex-col'
         >
-            <Link to={`/book/${id}`} state={{ book: props }}>
+            <Link to={`/book/${id}`} state={{ book: data }}>
                 <BookImg className='max-h-[240px] max-w-[190px] w-full h-full rounded-[12px]' />
             </Link>
             <div className='pt-1'>
