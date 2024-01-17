@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState } from "react";
+import React, { Fragment, memo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { ReactComponent as DropDownIcon } from "./../../../assets/icons/dropdown.svg";
 import { ReactComponent as UpDownIcon } from "./../../../assets/icons/upIcon.svg";
@@ -6,18 +6,12 @@ import { ReactComponent as UpDownIcon } from "./../../../assets/icons/upIcon.svg
 interface IProps {
     data: { name: string }[];
     onChange: (selected: { name: string }) => void;
+    selected: { name: string };
 }
-const Select = memo(function Select({ data, onChange }: IProps) {
-    const [selected, setSelected] = useState(data[0]);
-
-    const handleSelectChange = (value: { name: string }) => {
-        setSelected(value);
-        onChange(value);
-    };
-
+const Select = memo(function Select({ data, onChange, selected }: IProps) {
     return (
         <div className=' w-[132px] border  border-white border-opacity-30 rounded-[6px]'>
-            <Listbox value={selected} onChange={handleSelectChange}>
+            <Listbox value={selected} onChange={onChange}>
                 {({ open }) => (
                     <div className='relative mt-1'>
                         <Listbox.Button className='relative w-full cursor-default rounded-lg bg-none py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm'>

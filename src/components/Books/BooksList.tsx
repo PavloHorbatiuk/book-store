@@ -29,19 +29,26 @@ const BooksList = () => {
         setBooks(initialBooks);
     }, []);
 
-    const sort = (key: keyof BookType) => {
-        if (key) {
-            const sortedBooks = [...books].sort((a, b) => {
-                return a.name.localeCompare(b.name);
-            });
-            console.log(sortedBooks, "sorted books");
-            // setBooks(sortedBooks);
-        }
-    };
-    sort("name");
+    const sort = useCallback(
+        (value: string) => {
+            const sortBy: Record<string, (a: BookType, b: BookType) => number> =
+                {
+                    Name: (a, b) => a.name.localeCompare(b.name),
+                    Popularity: (a, b) => +b.rating - +a.rating,
+                    Newest: (a, b) => b.id - a.id,
+                };
+
+            if (value in sortBy) {
+                const sortedBooks = [...books].sort(sortBy[value]);
+                setBooks(sortedBooks);
+            }
+        },
+        [books]
+    );
+
     return (
         <div className='p-6'>
-            <BookOptions count={books.length} />
+            <BookOptions sort={sort} count={books.length} />
             <InfiniteScroll
                 dataLength={books.length}
                 next={fetchMoreBooks}
