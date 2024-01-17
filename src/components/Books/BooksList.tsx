@@ -36,7 +36,11 @@ const BooksList = () => {
                 dataLength={books.length}
                 next={fetchMoreBooks}
                 hasMore={hasMore}
-                loader={<Loader />}
+                loader={
+                    <div className='flex justify-center my-3'>
+                        <Loader />
+                    </div>
+                }
             >
                 <div className='book-list'>
                     {books.map((book, index) => (

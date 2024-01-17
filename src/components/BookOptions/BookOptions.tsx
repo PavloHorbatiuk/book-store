@@ -13,7 +13,7 @@ const BookOptions = ({ count }: IProps) => {
             <div className='flex items-center'>
                 <span className='flex w-[100px]'>
                     <SortBy className='cursor-pointer pr-1' />
-                    <h3>Sort By</h3>
+                    <span>Sort By</span>
                 </span>
                 <Select />
             </div>

@@ -9,7 +9,7 @@ const Select = () => {
     const [selected, setSelected] = useState(sort[0]);
 
     return (
-        <div className=' w-[132px] border  border-white border-opacity-30 rounded-md'>
+        <div className=' w-[132px] border  border-white border-opacity-30 rounded-[6px]'>
             <Listbox value={selected} onChange={setSelected}>
                 {({ open }) => (
                     <div className='relative mt-1'>
@@ -28,7 +28,7 @@ const Select = () => {
                             leaveFrom='opacity-100'
                             leaveTo='opacity-0'
                         >
-                            <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-darkGrey py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+                            <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-[8px] bg-darkGrey py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
                                 {sort.map((item, personIdx) => (
                                     <Listbox.Option
                                         key={personIdx}
