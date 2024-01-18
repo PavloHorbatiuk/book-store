@@ -35,7 +35,7 @@ const BooksList = () => {
                 {
                     Name: (a, b) => a.name.localeCompare(b.name),
                     Popularity: (a, b) => +b.rating - +a.rating,
-                    Newest: (a, b) => b.id - a.id,
+                    Newest: (a, b) => a.rating - b.rating,
                 };
 
             if (value in sortBy) {
@@ -45,6 +45,14 @@ const BooksList = () => {
         },
         [books]
     );
+
+    const setIsWatched = useCallback((id: string) => {
+        setBooks((prev) =>
+            prev.map((book) =>
+                book.id === id ? { ...book, isWatched: true } : book
+            )
+        );
+    }, []);
 
     return (
         <div className='p-6'>
@@ -61,7 +69,11 @@ const BooksList = () => {
             >
                 <div className='book-list'>
                     {books.map((book, index) => (
-                        <BookItem data={book} key={index} />
+                        <BookItem
+                            isWatch={setIsWatched}
+                            data={book}
+                            key={index}
+                        />
                     ))}
                 </div>
             </InfiniteScroll>

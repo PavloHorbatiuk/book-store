@@ -4,13 +4,14 @@ export interface ReaderReview {
 }
 
 export interface BookType {
-    id: number;
+    id: string;
     name: string;
     author: string;
     rating: number;
     description: string;
     cover: string;
     readerReviews: ReaderReview[];
+    isWatched?: boolean;
 }
 
 function generateRandomBook() {
@@ -37,13 +38,14 @@ function generateRandomBook() {
     const randomIndex = Math.floor(Math.random() * names.length);
 
     return {
-        id: randomIndex,
+        id: new Date().toString(),
         name: names[randomIndex],
         author: authors[randomIndex],
         rating: ratings[randomIndex],
         description: generateRandomDescription(),
         readerReviews: generateRandomReaderReviews(),
         cover: coverBook[randomIndex],
+        isWatched: false,
     };
 }
 

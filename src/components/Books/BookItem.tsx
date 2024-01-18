@@ -6,9 +6,10 @@ import { ReactComponent as WatchIcon } from "./../../assets/icons/notYetIcon.svg
 
 interface IProps {
     data: BookType;
+    isWatch: (id: string) => void;
 }
 
-const BookItem = ({ data }: IProps) => {
+const BookItem = ({ data, isWatch }: IProps) => {
     const { author, name, rating, id } = data;
     return (
         <motion.div
@@ -18,7 +19,11 @@ const BookItem = ({ data }: IProps) => {
         >
             <div className='max-h-[240px] max-w-[190px]  relative'>
                 <WatchIcon className='absolute top-0 right-1' />
-                <Link to={`/book/${id}`} state={{ book: data }}>
+                <Link
+                    onClick={() => isWatch(id)}
+                    to={`/book/${id}`}
+                    state={{ book: data }}
+                >
                     <BookImg className=' w-full h-full rounded-[12px]' />
                 </Link>
             </div>
