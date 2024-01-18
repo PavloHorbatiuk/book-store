@@ -61,7 +61,7 @@ const BooksList = () => {
             >
                 <div className='book-list'>
                     {books.map((book, index) => (
-                        <BookItem data={{ ...book, id: index }} key={index} />
+                        <BookItem data={book} key={index} />
                     ))}
                 </div>
             </InfiniteScroll>
