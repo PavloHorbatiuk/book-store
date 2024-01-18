@@ -92,5 +92,3 @@ function generateRandomReviewComment() {
 export function generateMockBooks(): BookType[] {
     return Array.from({ length: 10 }, generateRandomBook);
 }
-
-console.log(generateMockBooks(), "books");

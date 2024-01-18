@@ -14,6 +14,7 @@ const BookOptions = memo(function BookOptions({ count, sort }: IProps) {
     const handleSelectChange = useCallback((value: { name: string }) => {
         setSelected(value);
     }, []);
+
     const sortValue = useCallback(
         () => sort(selected.name),
         [selected.name, sort]
@@ -23,8 +24,11 @@ const BookOptions = memo(function BookOptions({ count, sort }: IProps) {
         <div className=' flex items-center justify-between scroll-smooth'>
             <h3>{count} Books</h3>
             <div className='flex items-center'>
-                <span onClick={sortValue} className='flex w-[100px]'>
-                    <SortBy className='cursor-pointer pr-1' />
+                <span className='flex w-[100px]'>
+                    <SortBy
+                        onClick={sortValue}
+                        className='cursor-pointer pr-1'
+                    />
                     <span>Sort By</span>
                 </span>
 

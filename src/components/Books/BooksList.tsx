@@ -4,7 +4,7 @@ import {
     generateMockBooks,
 } from "../../mockData/mockDataGenerator.ts";
 import InfiniteScroll from "react-infinite-scroll-component";
-import BookOptions from "../BookOptions/BookOptions";
+import BookOptions from "./BookOptions";
 import BookItem from "./BookItem";
 import Loader from "../ui/Loader/Loader";
 import "./BookStyle.css";
