@@ -1,33 +1,31 @@
-import React, { useCallback, useEffect, useState } from "react";
-import {
-    BookType,
-    generateMockBooks,
-} from "../../mockData/mockDataGenerator.ts";
+import React, { useCallback } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import BookOptions from "./BookOptions";
 import BookItem from "./BookItem";
 import Loader from "../ui/Loader/Loader";
 import "./BookStyle.css";
+import { BookType } from "../../store/slices/book/type";
+import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "../../store/store";
+import { getMoreBooks } from "../../store/slices/book/getMoreBooks";
+import { getHasMore } from "../../store/slices/book/selectors/getHasMore";
+import { getPageNumber } from "../../store/slices/book/selectors/getPageNumber";
+import { bookActions } from "../../store/slices/book/bookSlice";
+import { getBooks } from "../../store/slices/book/selectors/getBooks";
 
 const BooksList = () => {
-    const [books, setBooks] = useState<BookType[]>([]);
-    const [hasMore, setHasMore] = useState(true);
-    const [pageNumber, setPageNumber] = useState(1);
+    const hasMore = useSelector(getHasMore);
+    const pageNumber = useSelector(getPageNumber);
+    const books = useSelector(getBooks);
+    const dispatch = useDispatch<AppThunkDispatch>();
 
-    const fetchMoreBooks = useCallback(() => {
-        const additionalBooks = generateMockBooks().slice(10);
-        setBooks((prevBooks) => [...prevBooks, ...additionalBooks]);
-        setPageNumber((prevPageNumber) => prevPageNumber + 1);
-
-        if (pageNumber >= 5) {
-            setHasMore(false);
-        }
-    }, [pageNumber]);
-
-    useEffect(() => {
-        const initialBooks = generateMockBooks().slice(0, 10);
-        setBooks(initialBooks);
-    }, []);
+    const fetchMoreBooks = () => {
+        const params = {
+            page: pageNumber + 1,
+            limit: 10,
+        };
+        dispatch(getMoreBooks(params));
+    };
 
     const sort = useCallback(
         (value: string) => {
@@ -35,24 +33,25 @@ const BooksList = () => {
                 {
                     Name: (a, b) => a.name.localeCompare(b.name),
                     Popularity: (a, b) => +b.rating - +a.rating,
-                    Newest: (a, b) => a.rating - b.rating,
+                    Newest: (a, b) =>
+                        new Date(a.createdAt).valueOf() -
+                        new Date(b.createdAt).valueOf(),
                 };
 
             if (value in sortBy) {
-                const sortedBooks = [...books].sort(sortBy[value]);
-                setBooks(sortedBooks);
+                const sortedBooks = books.sort(sortBy[value]);
+                dispatch(bookActions.setBook(sortedBooks));
             }
         },
-        [books]
+        [books, dispatch]
     );
 
-    const setIsWatched = useCallback((id: string) => {
-        setBooks((prev) =>
-            prev.map((book) =>
-                book.id === id ? { ...book, isWatched: true } : book
-            )
-        );
-    }, []);
+    const setIsWatched = useCallback(
+        (index: number) => {
+            dispatch(bookActions.setIsWatched(index));
+        },
+        [dispatch]
+    );
 
     return (
         <div className='p-6'>
@@ -62,7 +61,7 @@ const BooksList = () => {
                 next={fetchMoreBooks}
                 hasMore={hasMore}
                 loader={
-                    <div className='flex justify-center my-3'>
+                    <div className='flex justify-center m-0 p-0 my-3 overflow-hidden'>
                         <Loader />
                     </div>
                 }
@@ -72,7 +71,8 @@ const BooksList = () => {
                         <BookItem
                             isWatch={setIsWatched}
                             data={book}
-                            key={index}
+                            index={index}
+                            key={book.id}
                         />
                     ))}
                 </div>

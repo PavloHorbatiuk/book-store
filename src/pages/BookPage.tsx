@@ -3,28 +3,35 @@ import { Link, useLocation } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import { ReactComponent as ArrowBackIcon } from "./../assets/icons/arrowback.svg";
 import { RoutePath } from "../routes/routerConfig";
-import { BookType } from "../mockData/mockDataGenerator.ts";
-import CoverBook from "./../assets/cover-book/coverBook1.svg";
+import { BookType } from "../store/slices/book/type";
+import LazyLoadImage from "../components/Books/LazyLoadImage";
 
 export const BookPage = () => {
     const { state } = useLocation();
-    const { name, description, author, rating, readerReviews }: BookType =
-        state.book;
+    const {
+        name,
+        cover,
+        description,
+        author,
+        rating,
+        readerReviews,
+        downloads,
+    }: BookType = state.book;
 
     return (
-        <div className='h-full'>
+        <div className='h-screen'>
             <Header>
                 <Link to={RoutePath.main}>
                     <ArrowBackIcon />
                 </Link>
             </Header>
-            <div className='flex flex-row  p-6'>
-                <div className='flex flex-col max-h-[358px] max-w-[284px] w-full'>
-                    <img
-                        className=' w-full h-full rounded-[12px]'
-                        src={CoverBook}
+            <div className='grid grid-flow-row sm:grid-flow-col justify-start p-6'>
+                <div className='flex flex-col h-full  max-w-[284px]'>
+                    <LazyLoadImage
+                        className=' max-h-[358px] w-full h-full rounded-[12px] object-cover'
+                        image={cover}
                     />
-                    <h4 className='pt-3'>Downloads: 10000</h4>
+                    <h4 className='pt-3'>Downloads: {downloads}</h4>
                 </div>
                 <div className='flex flex-col pl-6 space-y-10'>
                     <h4>Title: {name}</h4>

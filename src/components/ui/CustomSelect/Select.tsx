@@ -29,7 +29,7 @@ const Select = memo(function Select({ data, onChange, selected }: IProps) {
                             leaveFrom='opacity-100'
                             leaveTo='opacity-0'
                         >
-                            <Listbox.Options className='absolute mt-1 max-h-60 w-full overflow-auto rounded-[8px] bg-darkGrey py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+                            <Listbox.Options className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-[8px] bg-darkGrey py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm '>
                                 {data.map((item, personIdx) => (
                                     <Listbox.Option
                                         key={personIdx}
