@@ -29,6 +29,8 @@ const BooksList = () => {
 
     const sort = useCallback(
         (value: string) => {
+            console.log(value, "sorted books");
+
             const sortBy: Record<string, (a: BookType, b: BookType) => number> =
                 {
                     Name: (a, b) => a.name.localeCompare(b.name),
@@ -39,7 +41,7 @@ const BooksList = () => {
                 };
 
             if (value in sortBy) {
-                const sortedBooks = books.sort(sortBy[value]);
+                const sortedBooks = [...books].sort(sortBy[value]);
                 dispatch(bookActions.setBook(sortedBooks));
             }
         },
