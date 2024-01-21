@@ -17,7 +17,7 @@ export const BookPage = () => {
         readerReviews,
         downloads,
     }: BookType = state.book;
-    console.log(state, "state from page");
+
     return (
         <div className='h-screen'>
             <Header>
