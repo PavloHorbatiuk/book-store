@@ -10,6 +10,7 @@ interface IProps {
     data: BookType;
     index: number;
     isWatch: (index: number) => void;
+    scrollPosition: number;
 }
 
 const cardVariants = {
@@ -24,7 +25,7 @@ const cardVariants = {
         },
     },
 };
-const BookItem = ({ data, isWatch, index }: IProps) => {
+const BookItem = ({ data, isWatch, index, scrollPosition }: IProps) => {
     const { author, name, rating, id, cover, isWatched } = data;
     return (
         <motion.div
@@ -43,7 +44,7 @@ const BookItem = ({ data, isWatch, index }: IProps) => {
                 <Link
                     onClick={() => isWatch(index)}
                     to={`/book/${id}`}
-                    state={{ book: data }}
+                    state={{ book: data, scrollPosition: scrollPosition }}
                 >
                     {/* <BookImg className=' w-full h-full rounded-[12px]' /> */}
                     <LazyLoadImage
@@ -54,7 +55,7 @@ const BookItem = ({ data, isWatch, index }: IProps) => {
             </div>
             <div className='pt-1 text-left mt-2'>
                 <p>{author}</p>
-                <p className='break-words '>{name}</p>
+                <p className='break-words py-1'>{name}</p>
                 <p>{rating}/5</p>
             </div>
         </motion.div>

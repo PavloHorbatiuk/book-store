@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, ScrollRestoration, useLocation } from "react-router-dom";
 import { Header } from "../components/Header/Header";
 import { ReactComponent as ArrowBackIcon } from "./../assets/icons/arrowback.svg";
 import { RoutePath } from "../routes/routerConfig";
@@ -17,14 +17,18 @@ export const BookPage = () => {
         readerReviews,
         downloads,
     }: BookType = state.book;
-
+    console.log(state, "state from page");
     return (
         <div className='h-screen'>
             <Header>
-                <Link to={RoutePath.main}>
+                <Link
+                    to={RoutePath.main}
+                    state={{ scrollPosition: state.scrollPosition }}
+                >
                     <ArrowBackIcon />
                 </Link>
             </Header>
+            <ScrollRestoration />
             <div className='grid grid-flow-row sm:grid-flow-col justify-start p-6'>
                 <div className='flex flex-col h-full  max-w-[284px]'>
                     <LazyLoadImage

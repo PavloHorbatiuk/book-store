@@ -22,7 +22,7 @@ code {
     @apply text-white font-normal text-base 
   }
   h3{
-    @apply font-normal text-lg leading-[21.78px]
+    @apply font-normal  text-lg leading-[21.78px]
   }
   span{
     @apply text-white font-normal text-sm 

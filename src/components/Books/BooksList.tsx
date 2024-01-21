@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import BookOptions from "./BookOptions";
 import BookItem from "./BookItem";
@@ -12,12 +12,18 @@ import { getHasMore } from "../../store/slices/book/selectors/getHasMore";
 import { getPageNumber } from "../../store/slices/book/selectors/getPageNumber";
 import { bookActions } from "../../store/slices/book/bookSlice";
 import { getBooks } from "../../store/slices/book/selectors/getBooks";
+import { useWindowScrollPositions } from "../../common/hooks/useWindowScrollPositions";
+import { useLocation } from "react-router-dom";
+
+// import { useWindowScrollPositions } from "../../common/hooks/useWindowScrollPositions";
 
 const BooksList = () => {
     const hasMore = useSelector(getHasMore);
     const pageNumber = useSelector(getPageNumber);
     const books = useSelector(getBooks);
     const dispatch = useDispatch<AppThunkDispatch>();
+    const { scrollX, scrollY } = useWindowScrollPositions();
+    const location = useLocation();
 
     const fetchMoreBooks = () => {
         const params = {
@@ -27,10 +33,13 @@ const BooksList = () => {
         dispatch(getMoreBooks(params));
     };
 
+    useEffect(() => {
+        if (location.state) {
+            scrollTo(0, location.state.scrollPosition);
+        }
+    }, [location.state, scrollX]);
     const sort = useCallback(
         (value: string) => {
-            console.log(value, "sorted books");
-
             const sortBy: Record<string, (a: BookType, b: BookType) => number> =
                 {
                     Name: (a, b) => a.name.localeCompare(b.name),
@@ -63,10 +72,11 @@ const BooksList = () => {
                 next={fetchMoreBooks}
                 hasMore={hasMore}
                 loader={
-                    <div className='flex justify-center m-0 p-0 my-3 overflow-hidden'>
+                    <div className='loader-container'>
                         <Loader />
                     </div>
                 }
+                initialScrollY={scrollY}
             >
                 <div className='book-list'>
                     {books.map((book, index) => (
@@ -75,6 +85,7 @@ const BooksList = () => {
                             data={book}
                             index={index}
                             key={book.id}
+                            scrollPosition={scrollY}
                         />
                     ))}
                 </div>

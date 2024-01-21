@@ -1,3 +1,7 @@
 .book-list{
-    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center pt-2 overflow-hidden
+    @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-7 justify-items-center max-h-full overflow-hidden   pt-4   
 }
+.loader-container{
+    @apply flex justify-center m-0 p-0 my-3 overflow-hidden top-0 left-0
+}
+/* max-h-[897px] */
