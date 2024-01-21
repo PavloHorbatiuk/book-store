@@ -15,8 +15,6 @@ import { getBooks } from "../../store/slices/book/selectors/getBooks";
 import { useWindowScrollPositions } from "../../common/hooks/useWindowScrollPositions";
 import { useLocation } from "react-router-dom";
 
-// import { useWindowScrollPositions } from "../../common/hooks/useWindowScrollPositions";
-
 const BooksList = () => {
     const hasMore = useSelector(getHasMore);
     const pageNumber = useSelector(getPageNumber);

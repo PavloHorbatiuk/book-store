@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-// import { ReactComponent as BookImg } from "./../../assets/icons/bookImg.svg";
 import { motion } from "framer-motion";
 import { ReactComponent as WatchIcon } from "./../../assets/icons/notYetIcon.svg";
 import { ReactComponent as WatchedIcon } from "./../../assets/icons/readyIcon.svg";
-import LazyLoadImage from "./LazyLoadImage";
 import { BookType } from "../../store/slices/book/type";
+import LazyLoadImage from "./LazyLoadImage";
 
 interface IProps {
     data: BookType;
@@ -26,7 +25,7 @@ const cardVariants = {
     },
 };
 const BookItem = ({ data, isWatch, index, scrollPosition }: IProps) => {
-    const { author, name, rating, id, cover, isWatched } = data;
+    const { author, name, rating, id, isWatched, cover } = data;
     return (
         <motion.div
             whileHover={{ scale: [null, 1.1, 1.1] }}
@@ -46,7 +45,6 @@ const BookItem = ({ data, isWatch, index, scrollPosition }: IProps) => {
                     to={`/book/${id}`}
                     state={{ book: data, scrollPosition: scrollPosition }}
                 >
-                    {/* <BookImg className=' w-full h-full rounded-[12px]' /> */}
                     <LazyLoadImage
                         className='h-full w-full max-w-[190px] max-h-[240px] rounded-[12px]'
                         image={cover}
