@@ -40,7 +40,7 @@ const BooksList = () => {
         (value: string) => {
             const sortBy: Record<string, (a: BookType, b: BookType) => number> =
                 {
-                    Name: (a, b) => a.name.localeCompare(b.name),
+                    Name: (a, b) => a.author.localeCompare(b.author),
                     Popularity: (a, b) => +b.rating - +a.rating,
                     Newest: (a, b) =>
                         new Date(a.createdAt).valueOf() -

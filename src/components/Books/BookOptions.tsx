@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 import Select from "../ui/CustomSelect/Select";
 import { ReactComponent as SortBy } from "./../../assets/icons/sorticon.svg";
+import { motion } from "framer-motion";
 
 interface IProps {
     count: number;
@@ -24,13 +25,15 @@ const BookOptions = memo(function BookOptions({ count, sort }: IProps) {
         <div className=' flex items-center justify-between scroll-smooth'>
             <h3>{count} Books</h3>
             <div className='flex items-center'>
-                <span className='flex w-[100px]'>
-                    <SortBy
-                        onClick={sortValue}
-                        className='cursor-pointer pr-1'
-                    />
-                    <span>Sort By</span>
-                </span>
+                <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className='flex w-[100px]'
+                    onClick={sortValue}
+                >
+                    <SortBy className='cursor-pointer pr-1' />
+                    <span className='cursor-pointer'>Sort By</span>
+                </motion.span>
 
                 <Select
                     selected={selected}
